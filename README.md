@@ -1,2 +1,2 @@
-# plugify-dotnet-permissions-system
-[Permissions System] - A Plugin for Managing Player Privileges in Counter-Strike 2
+# Plugify Permissions System
+[Permissions System] - A Plugin for Managing Player Privileges for Source 2 games
