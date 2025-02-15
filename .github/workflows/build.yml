@@ -22,19 +22,22 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
       - name: Generate PPS Schemas
         run: |
           mkdir pps
           mkdir pps/out
           git clone --depth 1 https://github.com/untrustedmodders/plugify-module-dotnet.git
-          cp -r plugify-module-dotnet/generator/* pps/
+          cp -r plugify-module-dotnet/generator/* ./pps
           curl -o pps/s2sdk.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-source-2/refs/heads/main/s2sdk.pplugin.in
-          cp pps/s2sdk.pplugin.in pps/s2sdk.pplugin
-          python ./pps/generator.py ./pps/s2sdk.pplugin ./pps/out
           curl -o pps/s2menu.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-menu_system/refs/heads/main/s2menu.pplugin.in
-          cp pps/s2menu.pplugin.in pps/s2menu.pplugin
-          python ./pps/generator.py ./pps/s2menu.pplugin ./pps/out
-          python ./generator.py ./menu.pplugin.in ./out
+          ls /pps
+          python ./pps/generator.py ./pps/s2sdk.pplugin.in ./pps/out
+          python ./pps/generator.py ./pps/s2menu.pplugin.in ./pps/out
 
       - name: Restore dependencies
         run: dotnet restore
