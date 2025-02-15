@@ -38,7 +38,6 @@ jobs:
           ls ./PermissionsSystem/pps/out
           python plugify-module-dotnet/generator/generator.py plugify-module-dotnet/generator/s2sdk.pplugin.in ./PermissionsSystem/pps/out
           python plugify-module-dotnet/generator/generator.py plugify-module-dotnet/generator/s2menu.pplugin.in ./PermissionsSystem/pps/out
-          cp -r ./PermissionsSystem/pps/out/pps/* ./PermissionsSystem/pps
           echo ">>>>>>> Generated PPS Schemas"
           ls ./PermissionsSystem/pps
           echo ">>>>>>> Project Files"
