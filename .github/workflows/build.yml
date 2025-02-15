@@ -18,6 +18,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set GITHUB_SHA_SHORT and Get Current Tag
+        id: version
+        run: |
+          echo "GITHUB_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_ENV
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "no-tag")
+          echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
+          echo "CURRENT_TAG=$TAG" >> $GITHUB_OUTPUT
+          echo "GITHUB_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+
+      
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -42,12 +52,19 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore --configuration Release
+
+      - name: Setup Plugin Dir
+        run: |
+          mkdir Plugify
+          mkdir Plugify/bin
+          cp PermissionsSystem/bin/Release/net9.0/* Plugify/bin
+          cp PermissionsSystem.pplugin Plugify/PermissionsSystem.pplugin
       
       - name: Publish artifact
         uses: actions/upload-artifact@v4
         with:
           name: permissions_system_${{ env.GITHUB_SHA_SHORT }}
-          path: PermissionsSystem/bin/Release/net9.0
+          path: Plugify
 
   release:
     runs-on: ubuntu-latest
@@ -60,6 +77,11 @@ jobs:
           name: permissions_system_${{ env.GITHUB_SHA_SHORT }}
           path: build
 
+      - name: Create zip archive
+        run: |
+          cd build
+          zip -r permissions_system_${{ env.CURRENT_TAG }}_${{ env.GITHUB_SHA_SHORT }}.zip .
+
       - name: Release ${{ github.ref }}
         uses: softprops/action-gh-release@v2
         with:
@@ -67,4 +89,4 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          files: build/permissions_system_${{ env.GITHUB_SHA_SHORT }}.zip
+          files: build/permissions_system_${{ env.CURRENT_TAG }}_${{ env.GITHUB_SHA_SHORT }}.zip

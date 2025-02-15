@@ -19,7 +19,7 @@
 			"name": "s2sdk"
 		},
 		{
-			"name": "menu_system"
+			"name": "s2menu"
 		}
 	],
 	"exportedMethods": [
