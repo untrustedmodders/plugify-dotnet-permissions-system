@@ -39,7 +39,10 @@ jobs:
           python ./pps/generator.py ./pps/s2sdk.pplugin.in ./pps/out
           python ./pps/generator.py ./pps/s2menu.pplugin.in ./pps/out
           cp -r ./pps/out/pps/* ./pps
+          echo ">>>>>>> Generated PPS Schemas"
           ls ./pps
+          echo ">>>>>>> Project Files"
+          ls
 
       - name: Restore dependencies
         run: dotnet restore
