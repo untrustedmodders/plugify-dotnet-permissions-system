@@ -24,6 +24,7 @@ jobs:
 
       - name: Generate PPS Schemas
         run: |
+          mkdir pps
           mkdir pps/out
           git clone --depth 1 https://github.com/untrustedmodders/plugify-module-dotnet.git
           cp -r plugify-module-dotnet/generator/* pps/
