@@ -24,13 +24,15 @@ jobs:
 
       - name: Generate PPS Schemas
         run: |
-          mkdir pps
+          mkdir pps/out
           git clone --depth 1 https://github.com/untrustedmodders/plugify-module-dotnet.git
           cp -r plugify-module-dotnet/generator/* pps/
           curl -o pps/s2sdk.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-source-2/refs/heads/main/s2sdk.pplugin.in
-          python ./pps/generator.py ./pps/s2sdk.pplugin.in ./pps/out
+          cp pps/s2sdk.pplugin.in pps/s2sdk.pplugin
+          python ./pps/generator.py ./pps/s2sdk.pplugin ./pps/out
           curl -o pps/menu.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-menu_system/refs/heads/main/menu.pplugin.in
-          python ./pps/generator.py ./pps/menu.pplugin.in ./pps/out
+          cp pps/s2menu.pplugin.in pps/s2menu.pplugin
+          python ./pps/generator.py ./pps/s2menu.pplugin ./pps/out
           python ./generator.py ./menu.pplugin.in ./out
 
       - name: Restore dependencies
