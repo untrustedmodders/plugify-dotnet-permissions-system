@@ -32,12 +32,12 @@ jobs:
           mkdir pps
           mkdir pps/out
           git clone --depth 1 https://github.com/untrustedmodders/plugify-module-dotnet.git
-          cp -r plugify-module-dotnet/generator/* ./pps
-          curl -o pps/s2sdk.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-source-2/refs/heads/main/s2sdk.pplugin.in
-          curl -o pps/s2menu.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-menu_system/refs/heads/main/s2menu.pplugin.in
-          ls ./pps
-          python ./pps/generator.py ./pps/s2sdk.pplugin.in ./pps/out
-          python ./pps/generator.py ./pps/s2menu.pplugin.in ./pps/out
+          curl -o plugify-module-dotnet/generator/s2sdk.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-source-2/refs/heads/main/s2sdk.pplugin.in
+          curl -o plugify-module-dotnet/generator/s2menu.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-menu_system/refs/heads/main/s2menu.pplugin.in
+          ls plugify-module-dotnet/generator
+          ls ./pps/out
+          python plugify-module-dotnet/generator/generator.py plugify-module-dotnet/generator/s2sdk.pplugin.in ./pps/out
+          python plugify-module-dotnet/generator/generator.py plugify-module-dotnet/generator/s2menu.pplugin.in ./pps/out
           cp -r ./pps/out/pps/* ./pps
           echo ">>>>>>> Generated PPS Schemas"
           ls ./pps
