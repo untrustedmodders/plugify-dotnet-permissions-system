@@ -1,0 +1,27 @@
+{
+	"$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/plugin.schema.json",
+	"fileVersion": 1,
+	"version": "0.0.1",
+	"friendlyName": "Permissions System",
+	"description": "A Plugin for Managing Player Privileges for Source 2 games",
+	"createdBy": "untrustedmodders",
+	"createdByURL": "https://github.com/untrustedmodders",
+	"docsURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system",
+	"downloadURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system/releases",
+	"updateURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system/permissions-system.json",
+	"entryPoint": "bin/PermissionsSystem.dll",
+	"supportedPlatforms": [],
+	"languageModule": {
+		"name": "csharp-dotnet"
+	},
+	"dependencies": [
+		{
+			"name": "s2sdk"
+		},
+		{
+			"name": "menu_system"
+		}
+	],
+	"exportedMethods": [
+	]
+}

@@ -1,0 +1,22 @@
+{
+    "$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/package.schema.json",
+    "content": {
+        "plugify-dotnet-permissions-system": {
+            "name": "plugify-dotnet-permissions-system",
+            "type": "plugin",
+            "author": "untrustedmodders",
+            "description": "A Plugin for Managing Player Privileges for Source 2 games",
+            "versions": [
+                {
+                    "version": "0.0.1",
+                    "checksum": "",
+                    "download": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system/releases/download/v0.0.1/plugify-dotnet-permissions-system.zip",
+                    "platforms": [
+                        "windows",
+                        "linux"
+                    ]
+                }
+            ]
+        }
+    }
+}

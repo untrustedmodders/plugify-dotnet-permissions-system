@@ -1,0 +1,18 @@
+# IDEs
+.idea
+.vscode
+.vs
+.PVS-Studio
+*.DotSettings.user
+
+# CMake
+CMakeUserPresets.json
+
+# Build results
+/build
+obj/
+bin/
+
+# Plugify
+pps/
+.fake

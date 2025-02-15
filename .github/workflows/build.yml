@@ -1,0 +1,70 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Generate PPS Schemas
+        run: |
+          mkdir pps
+          git clone --depth 1 https://github.com/untrustedmodders/plugify-module-dotnet.git
+          cp -r plugify-module-dotnet/generator/* pps/
+          curl -o pps/s2sdk.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-source-2/refs/heads/main/s2sdk.pplugin.in
+          python ./pps/generator.py ./pps/s2sdk.pplugin.in ./pps/out
+          curl -o pps/menu.pplugin.in https://raw.githubusercontent.com/untrustedmodders/plugify-menu_system/refs/heads/main/menu.pplugin.in
+          python ./pps/generator.py ./pps/menu.pplugin.in ./pps/out
+          python ./generator.py ./menu.pplugin.in ./out
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # - name: Archive build output
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   run: |
+      #     mkdir -p release
+      #     zip -r release/build_output.zip ./bin
+
+      # - name: Create Release
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     draft: false
+      #     prerelease: false
+      #     body: |
+      #       Release notes for ${{ github.ref }}
+
+      # - name: Upload Release Asset
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: ./release/build_output.zip
+      #     asset_name: build_output.zip
+      #     asset_content_type: application/zip
