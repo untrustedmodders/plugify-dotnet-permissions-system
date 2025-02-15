@@ -5,7 +5,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  release:
+  create:
+    tags:
+      - v*
+    branches: main
     types: [created]
 
 jobs:
