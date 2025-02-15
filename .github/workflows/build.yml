@@ -9,7 +9,6 @@ on:
     tags:
       - v*
     branches: main
-    types: [created]
 
 jobs:
   build:
