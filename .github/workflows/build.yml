@@ -3,29 +3,50 @@ name: Build & Release
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+    - LICENSE
+    - README.md
+    - 'Config/**'
   pull_request:
     branches: [ main ]
-  create:
-    tags:
-      - v*
-    branches: main
+    paths-ignore:
+    - LICENSE
+    - README.md
+    - 'Config/**'
 
 jobs:
+  setup:
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - name: Generate Release
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+
   build:
     runs-on: ubuntu-latest
-
+    needs: ["setup"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set GITHUB_SHA_SHORT and Get Current Tag
-        id: version
+      - name: Prepare environment
         run: |
-          echo "GITHUB_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_ENV
+          echo "GITHUB_SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "no-tag")
           echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
           echo "CURRENT_TAG=$TAG" >> $GITHUB_OUTPUT
-          echo "GITHUB_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+          echo "GITHUB_SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
       
       - name: Setup .NET
@@ -67,10 +88,16 @@ jobs:
           path: Plugify
 
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/') # Only run on tag push
-    needs: build
+    needs: ["setup", "build"]
+    if: ${{ needs.setup.outputs.release_created }}
     steps:
+      - name: Prepare env
+        shell: bash
+        run: echo "GITHUB_SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -82,10 +109,10 @@ jobs:
           cd build
           zip -r permissions_system_${{ env.CURRENT_TAG }}_${{ env.GITHUB_SHA_SHORT }}.zip .
 
-      - name: Release ${{ github.ref }}
+      - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ needs.setup.outputs.tag_name }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false

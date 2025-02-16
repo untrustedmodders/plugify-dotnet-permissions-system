@@ -46,23 +46,23 @@ namespace SDK
 
 				SetMenuTitle(Menu, "[Permissions] v0.0.1");
 
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 1", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 2", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
-				AddMenuItem(Menu, IMenuItemStyleFlags_t.MENU_ITEM_DEFAULT, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 1", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 2", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
+				AddMenuItem(Menu, MenuItemStyleFlags.Default, "Test 3", CallBackItem, IntPtr.Zero);
 				// HookMenuClose(Menu, CallBackItem);
 
 				DisplayMenu(_MenuSystem, Menu, caller, 0, 0);

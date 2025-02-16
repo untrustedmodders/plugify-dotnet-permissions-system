@@ -8,7 +8,7 @@
 	"createdByURL": "https://github.com/untrustedmodders",
 	"docsURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system",
 	"downloadURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system/releases",
-	"updateURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system/permissions-system.json",
+	"updateURL": "https://github.com/untrustedmodders/plugify-dotnet-permissions-system/PermissionsSystem.json",
 	"entryPoint": "bin/PermissionsSystem.dll",
 	"supportedPlatforms": [],
 	"languageModule": {
